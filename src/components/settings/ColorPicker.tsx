@@ -54,9 +54,9 @@ type Colors = {
 const loadColorsFromLocalStorage = (): Colors => {
   if (typeof window !== "undefined") {
     const savedColors = localStorage.getItem("colors");
-    return savedColors ? JSON.parse(savedColors) : { primary: "#9c27b0" };
+    return savedColors ? JSON.parse(savedColors) : { primary: "#4784CD" };
   }
-  return { primary: "#9c27b0" };
+  return { primary: "#4784CD" };
 };
 
 // Apply color immediately on page load (before React renders)

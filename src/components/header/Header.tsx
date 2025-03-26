@@ -5,13 +5,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Sidebar } from "../sidebar/SideBar";
+import { ThemeToggle } from "../theme/ThemeToggle";
+import { primaryLogo } from "@/lib/images/importImage";
 
 export function Header() {
   const [mobileSearch, setMobileSearch] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 h-16">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between md:justify-end px-4 gap-4">
         <div className="flex items-center gap-2 md:gap-4">
           {/* Mobile Menu Trigger */}
           <Sheet>
@@ -27,12 +29,7 @@ export function Header() {
           </Sheet>
 
           <a href="/" className="flex items-center gap-2 lg:hidden">
-            <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold">A</span>
-            </div>
-            <span className="hidden text-xl font-bold md:inline-block">
-              Affpilot
-            </span>
+            <img src={primaryLogo} className="w-30 h-fit" />
           </a>
         </div>
         <div className="flex items-center gap-2">
@@ -86,6 +83,11 @@ export function Header() {
               </Avatar>
             </>
           )}
+        </div>
+
+        <div className="cursor-pointer">
+          {/* theme toggle */}
+          <ThemeToggle />
         </div>
       </div>
     </header>
