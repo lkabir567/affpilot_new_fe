@@ -18,7 +18,6 @@ function App() {
           }
         />
       </Routes>
-
       {/* authentication routes e.g (login,register,etc) */}
       <AuthRoute />
     </div>

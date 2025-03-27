@@ -8,7 +8,7 @@ export function ThemeToggle() {
   return (
     <Button
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="p-2 bg-secondary text-secondary-foreground rounded-md cursor-pointer"
+      className="p-2 bg-primary text-white rounded-md cursor-pointer hover:text-black"
     >
       {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
     </Button>

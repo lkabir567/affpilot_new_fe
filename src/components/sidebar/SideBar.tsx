@@ -22,7 +22,7 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
       )}
     >
       {/* Logo Section */}
-      <div className=" border-b flex items-center justify-between h-16">
+      <div className="border-b flex items-center justify-between h-16">
         <a href="/" className="mx-auto">
           <img src={primaryLogo} className="w-30 h-fit" />
         </a>
@@ -34,9 +34,9 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
       <Navigation />
 
       {/* Bottom Section */}
-      <div className="mt-auto p-4 border-t">
+      <div className="mt-auto px-4 pt-1 border-t">
         {!openSetting && (
-          <Card className="flex items-center gap-3 p-3 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 transition cursor-pointer">
+          <Card className="flex items-center gap-2 p-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900 transition cursor-pointer">
             <div>
               <div className="h-8 w-8 rounded-lg bg-gray-200 dark:bg-gray-700 flex items-center justify-center mb-2">
                 <BarChart2 className="h-5 w-5 text-primary" />
@@ -50,9 +50,9 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
         )}
 
         {/* Color change */}
-        <div className="grid grid-cols-2 gap-2 mt-3 relative">
+        <div className="grid grid-cols-2 gap-2 mt-3 relative mb-1">
           {openSetting && (
-            <Card className="absolute -bottom-2 w-full py-6 px-2 border">
+            <Card className="absolute -bottom-1 w-full py-8 px-2 border">
               <Button
                 className="w-fit ml-auto absolute -top-4 -right-2"
                 variant="outline"
@@ -66,14 +66,17 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
 
           <Button
             variant="outline"
-            className="h-10 w-full rounded-lg"
+            className="h-10 w-full rounded-lg hover:text-white hover:bg-primary cursor-pointer"
             onClick={() => setOpenSetting(true)}
           >
-            <Settings className="h-5 w-5 mr-2" />
+            <Settings className="h-5 w-5 mr-1" />
             <span>Settings</span>
           </Button>
-          <Button variant="outline" className="h-10 w-full rounded-lg">
-            <HelpCircle className="h-5 w-5 mr-2" />
+          <Button
+            variant="outline"
+            className="h-10 w-full rounded-lg hover:text-white hover:bg-primary cursor-pointer"
+          >
+            <HelpCircle className="h-5 w-5 mr-1" />
             <span>Help</span>
           </Button>
         </div>

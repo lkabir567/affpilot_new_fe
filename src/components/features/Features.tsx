@@ -19,7 +19,7 @@ const Features: React.FC<FeaturesProps> = ({
       <CardContent>
         <div className="flex items-center justify-between">
           <div className="space-y-4 group">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent hover:bg-gradient-to-t py-1">
+            <h1 className="text-4xl font-bold bg-gradient-to-t from-primary to-secondary bg-clip-text text-transparent py-1">
               {heading ? heading : "Features Page"}
             </h1>
             <p className="text-gray-900 font-medium text-sm">
