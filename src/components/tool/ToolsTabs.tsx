@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
+import useFeatureList from "@/hooks/features/useFeatureList";
 
 const tabs = [
   { id: "all", label: "All Tools" },
@@ -8,9 +8,12 @@ const tabs = [
   { id: "amazon-review", label: "Amazon Review" },
   { id: "more-tools", label: "More Tools" },
 ];
-
 export function ToolsTabs() {
-  const [activeTab, setActiveTab] = useState("all");
+  const { currentTools, setCurrentTools } = useFeatureList();
+
+  const handleTabClick = (tabId: string) => {
+    setCurrentTools(tabId);
+  };
 
   return (
     <div className="border-b border-slate-200 dark:border-slate-800">
@@ -21,10 +24,10 @@ export function ToolsTabs() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabClick(tab.id)}
               className={cn(
                 "relative px-4 py-2 text-sm font-medium rounded-full transition-colors",
-                activeTab === tab.id
+                currentTools === tab.id
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800"
               )}
