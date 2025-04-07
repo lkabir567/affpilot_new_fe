@@ -95,7 +95,7 @@ export default function LoginForm() {
                     />
                   </FormControl>
                   <span
-                    className={`absolute right-3 top-12 cursor-pointer text-muted-foreground`}
+                    className={`absolute right-3 top-8.5 cursor-pointer text-muted-foreground`}
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
