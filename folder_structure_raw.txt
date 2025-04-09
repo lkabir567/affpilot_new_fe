@@ -152,7 +152,7 @@ Affpilot/
   - .eslintrc                      #  - ESLint config
   - .prettierrc                    #  - Prettier config
   - tsconfig.json                  # TypeScript config
-  - vite.config.ts                 # Vite configuration
+  on
   - package.json                   #  - NPM dependencies
   - README.md                      #  - Project documentation
   - tailwind.config.js             #  - Tailwind CSS config
