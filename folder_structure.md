@@ -1,0 +1,144 @@
+.
+└── Affpilot/
+├── public/ # Static assets served directly
+│ ├── favicon.ico # Website favicon
+│ ├── robots.txt # Search engine crawler instructions
+│ ├── vite.svg # Vite framework logo
+│ └── index.html # - Main HTML entry point (critical for Vite)
+├── src/
+│ ├── app/
+│ │ ├── core/ # Root component
+│ │ │ ├── App.tsx # Root React component  
+ │ │ │ ├── AppProviders.tsx # Context providers wrapper  
+ │ │ │ └── AppRouter.tsx # Main router configuration
+│ │ └── config/  
+ │ │ ├── routes.ts # Route definitions
+│ │ ├── constants.ts # App-wide constants
+│ │ └── apiConfig.ts # - API endpoint configurations
+│ ├── assets/
+│ │ ├── images/ # Image assets
+│ │ ├── fonts/ # Font files
+│ │ └── styles/
+│ │ ├── global.css # Global CSS styles
+│ │ └── tailwind/ # Tailwind configuration
+│ │ ├── base.css # - Tailwind base styles
+│ │ └── components.css # - Component-specific styles
+│ ├── components/
+│ │ ├── ui/ # Reusable UI components
+│ │ │ ├── button.tsx
+│ │ │ └── ...
+│ │ ├── shared/ # Shared components across features
+│ │ │ ├── Table/
+│ │ │ ├── DashboardCard/
+│ │ │ ├── FormBuilder/
+│ │ │ └── ...
+│ │ └── features/ # Feature-specific components
+│ ├── features/
+│ │ ├── auth/ # Authentication feature
+│ │ │ ├── components/ # Auth-related components
+│ │ │ ├── hooks/ # Auth custom hooks
+│ │ │ ├── types.ts # Auth type definitions
+│ │ │ └── schemas/ # - Validation schemas (Zod/Yup)
+│ │ ├── content-generation/
+│ │ │ └── bulk-article/
+│ │ │ ├── components/
+│ │ │ │ ├── BulkConfigForm/
+│ │ │ │ │ ├── BulkConfigForm.tsx # Main component
+│ │ │ │ │ ├── BulkConfigForm.styles.ts # Component styles
+│ │ │ │ │ └── BulkConfigForm.test.tsx # - Component tests
+│ │ │ │ └── index.ts # Component exports
+│ │ │ ├── hooks/
+│ │ │ │ ├── useBulkGeneration.ts # Bulk generation logic
+│ │ │ │ ├── useContentExport.ts # Export functionality
+│ │ │ │ └── index.ts # Hook exports
+│ │ │ ├── utils/
+│ │ │ │ ├── contentParser.ts # Content parsing utilities
+│ │ │ │ ├── templateEngine.ts # Template processing
+│ │ │ │ └── index.ts # Utility exports
+│ │ │ ├── types/
+│ │ │ │ ├── bulkTypes.ts # Type definitions
+│ │ │ │ └── index.ts # Type exports
+│ │ │ └── index.ts # Feature entry point
+│ │ ├── seo-tools/
+│ │ │ └── keyword-research
+│ │ ├── integration/
+│ │ │ ├── wordpress/
+│ │ │ └── blogger/
+│ │ ├── tutorials/
+│ │ │ └── videoLibrary/
+│ │ ├── referral/
+│ │ ├── plans/
+│ │ │ └── components/
+│ │ ├── billing
+│ │ │ └── components/
+│ │ └── history/
+│ │ └── postHistory/
+│ ├── hooks/ # Shared custom hooks
+│ │ └── useDebounce.ts # - Common debounce hook
+│ ├── layouts/ # Application layouts
+│ │ ├── MainLayout.tsx # Primary layout
+│ │ └── DashboardLayout.tsx # Dashboard-specific layout
+│ ├── lib/ # External integrations
+│ │ ├── ai/
+│ │ │ ├── openai.ts # OpenAI client
+│ │ │ └── ...
+│ │ ├── cms/ # CMS integrations
+│ │ └── httpClient.ts # - Unified HTTP client
+│ ├── pages/ # Page components
+│ │ ├── public/ # Public pages
+│ │ │ └── Home/
+│ │ │ ├── HomePage.tsx # Landing page
+│ │ │ └── components/ # Landing page specific components
+│ │ ├── Pricing/
+│ │ └── private/ # Auth-protected pages
+│ │ └── dashboard/ # Main dashboard layout wrapper
+│ │ ├── DashboardLayout.tsx # Shared dashboard layout
+│ │ ├── Overview/ # Dashboard homepage
+│ │ │ ├── OverviewPage.tsx
+│ │ │ └── components/ # Stats widgets, quick action cards
+│ │ ├── content-generation/ # AI writing features
+│ │ │ └── bulk-article-generation
+│ │ │ └── BulkArticleGeneration.tsx
+│ │ └── seo-tools/
+│ ├── providers/ # Context providers
+│ │ └── AuthProvider.tsx # - Authentication context
+│ ├── redux/ # State management
+│ │ ├── store.ts # Redux store
+│ │ ├── rootReducer.ts # Combined reducers
+│ │ ├── middleware/
+│ │ │ ├── authMiddleware.ts # Auth middleware
+│ │ │ └── ...
+│ │ ├── api/
+│ │ │ ├── contentApi.ts # Content-related API calls
+│ │ │ ├── seoApi.ts # SEO tools API
+│ │ │ └── ...
+│ │ ├── slices/ # Redux slices
+│ │ │ ├── uiSlice.ts # UI state
+│ │ │ ├── authSlice.ts # Auth state
+│ │ │ └── ...
+│ │ └── types/ # Redux type definitions
+│ ├── services/ # Business logic services
+│ │ ├── contentService.ts # Content operations
+│ │ ├── seoService.ts # SEO calculations
+│ │ └── ...
+│ ├── types/ # Global type definitions
+│ │ └── index.d.ts # - Base type declarations
+│ ├── utils/ # Utility functions
+│ │ ├── contentHelpers.ts # Content manipulation
+│ │ ├── seoCalculator.ts # SEO metrics
+│ │ └── errorHandler.ts # - Error handling utilities
+│ ├── validations/ # Validation schemas
+│ │ └── authSchemas.ts # - Auth form validations
+│ └── e2e/ # End-to-end tests
+│ └── cypress/ # - Cypress config
+│ └── integration/
+│ └── auth.spec.ts # - Test specs
+├── .env # Environment variables
+├── .eslintrc # - ESLint config
+├── .prettierrc # - Prettier config
+├── tsconfig.json # TypeScript config
+├── vite.config.ts # Vite configuration
+├── package.json # - NPM dependencies
+├── README.md # - Project documentation
+├── tailwind.config.js # - Tailwind CSS config
+└── jest.config.ts # - Testing framework config
