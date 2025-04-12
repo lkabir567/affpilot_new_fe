@@ -6,6 +6,7 @@ import ResetPasswordPage from "@/pages/public/reset-password/ResetPasswordPage";
 import SignupPage from "@/pages/public/signup/SignupPage";
 import { createBrowserRouter } from "react-router-dom";
 import { AuthGuard } from "../core/route-protection/AuthGuard";
+import { contentGenerationRoute } from "./content-route/content.route";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: <OverviewPage />,
       },
+      ...contentGenerationRoute,
     ],
   },
 ]);

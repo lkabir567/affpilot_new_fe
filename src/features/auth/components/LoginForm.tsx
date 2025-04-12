@@ -62,16 +62,6 @@ export function LoginForm() {
       setIsLoading(false);
     }
   };
-  //   const handleSubmit = async (values: z.infer<typeof loginSchema>) => {
-  //     setIsLoading(true);
-  //     console.log("Form submitted", values);
-  //     setIsLoading(false);
-  //   };
-
-  //   const handleGoogleLogin = () => {
-  //     console.log("Google login initiated");
-  //     // Implement Google OAuth login
-  //   };
 
   const handleCaptchaChange = (value: string | null) => {
     form.setValue("captchaToken", value || "");
