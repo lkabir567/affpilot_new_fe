@@ -1,15 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Globe, ImageIcon, MessageSquareText } from "lucide-react";
+import { FileText, Globe, MessageSquareText } from "lucide-react";
 import { useBulkInfoForm } from "../hooks/useBulkInfoForm";
 import SubmitButton from "@/components/shared/submit-button/SubmitButton";
 import FormBadges from "@/components/shared/form-badges/FormBadges";
@@ -22,18 +14,15 @@ import {
   Keywords,
   NumberOfFAQs,
   PublishDestination,
+  RealTimeData,
   SelectArticleType,
+  SelectImageSource,
   SelectLanguage,
   SubHeadings,
 } from "../../shared";
 
 export const BulkArticleGenerationForm = () => {
-  const {
-    bulkForm: form,
-    onSubmit,
-    isSubmitting,
-    selectedGptVersion,
-  } = useBulkInfoForm();
+  const { bulkForm: form, onSubmit, isSubmitting } = useBulkInfoForm();
   return (
     <div className="mx-auto">
       <Card className="border-0 sm:border-1 md:shadow-none shadow-none sm:shadow-lg">
@@ -51,17 +40,24 @@ export const BulkArticleGenerationForm = () => {
                   </h2>
                 </div>
                 <div className="grid gap-4 md:px-2">
-                  {/* AI Model GPT Version */}
-                  <GptVersion
-                    control={form.control}
-                    selectedGptVersion={selectedGptVersion}
-                  />
+                  <div className="border rounded-md p-4">
+                    {/* AI Model GPT Version */}
+                    <GptVersion control={form.control} name="gptVersion" />
+
+                    {/* Real-time data */}
+                    {form.watch("gptVersion") === "gpt-4o-mini" && (
+                      <RealTimeData
+                        control={form.control}
+                        name="realTimeData"
+                      />
+                    )}
+                  </div>
 
                   {/* Keywords */}
-                  <Keywords control={form.control} />
+                  <Keywords control={form.control} name="keywords" />
 
                   {/* AI Generated Title */}
-                  <AiTitle control={form.control} />
+                  <AiTitle control={form.control} name="aiGeneratedTitle" />
                 </div>
               </div>
               <Separator className="my-8" />
@@ -81,23 +77,29 @@ export const BulkArticleGenerationForm = () => {
                   {/* language and content and tone and word count */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:px-2">
                     {/* Language */}
-                    <SelectLanguage control={form.control} />
+                    <SelectLanguage control={form.control} name="language" />
 
                     {/* Type of Article */}
-                    <SelectArticleType control={form.control} />
+                    <SelectArticleType
+                      control={form.control}
+                      name="articleType"
+                    />
                   </div>
 
                   {/*  sub-heading & FAQs*/}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-2">
                     {/* Number of Sub-Headings */}
-                    <SubHeadings control={form.control} />
+                    <SubHeadings control={form.control} name="subHeadings" />
 
                     {/* Number of FAQs */}
-                    <NumberOfFAQs control={form.control} />
+                    <NumberOfFAQs control={form.control} name="faqs" />
                   </div>
 
                   {/* Include FAQ Schema */}
-                  <IncludeFAQSchema control={form.control} />
+                  <IncludeFAQSchema
+                    control={form.control}
+                    name="includeFaqSchema"
+                  />
                 </div>
               </div>
               <Separator className="my-8" />
@@ -117,61 +119,29 @@ export const BulkArticleGenerationForm = () => {
                 <PublishDestination
                   control={form.control}
                   setValue={form.setValue}
+                  name="publishingDestination"
                 />
 
                 {/* Select Image */}
                 <Separator />
                 <div className="grid grid-cols-1 gap-6 mt-6 md:px-2">
                   {/* Select Image Source */}
-                  <FormField
+                  <SelectImageSource
                     control={form.control}
+                    setValue={form.setValue}
                     name="imageSource"
-                    render={({ field }) => (
-                      <FormItem className="space-y-3">
-                        <FormLabel className="font-medium text-gray-700 flex items-center gap-2">
-                          <ImageIcon className="h-4 w-4 text-blue-500" />
-                          Select Image Source
-                        </FormLabel>
-                        <FormControl>
-                          <Tabs
-                            value={field.value}
-                            onValueChange={(value) =>
-                              form.setValue(
-                                "imageSource",
-                                value as "google" | "none"
-                              )
-                            }
-                            className="w-full"
-                          >
-                            <TabsList className="w-fit flex gap-4">
-                              <TabsTrigger
-                                value="google"
-                                className="flex-1 flex gap-2 items-center justify-center"
-                              >
-                                <ImageIcon className="h-4 w-4" />
-                                Use Google Images
-                              </TabsTrigger>
-                              <TabsTrigger
-                                value="none"
-                                className="flex-1 justify-center"
-                              >
-                                Don't use images
-                              </TabsTrigger>
-                            </TabsList>
-                          </Tabs>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
                   />
 
                   {/* Image Credit */}
                   {form.watch("imageSource") === "google" && (
-                    <ImageCredit control={form.control} />
+                    <ImageCredit control={form.control} name="imageCredit" />
                   )}
 
                   {/* Include YouTube Video */}
-                  <IncludeVideo control={form.control} />
+                  <IncludeVideo
+                    control={form.control}
+                    name="includeYoutubeVideo"
+                  />
                 </div>
               </div>
               <Separator />

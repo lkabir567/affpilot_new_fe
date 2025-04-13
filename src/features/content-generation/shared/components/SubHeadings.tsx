@@ -1,9 +1,7 @@
 import SelectInput from "@/components/shared/inputs/SelectInput";
 import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Heading2 } from "lucide-react";
-import { FC } from "react";
-import { Control } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 const subHeadingOptions = [
   {
@@ -22,20 +20,22 @@ type SubHeadings = {
   value: string;
 };
 
-interface SubHeadingsProps {
-  control: Control<ContentGenCommonFormValues>;
+interface SubHeadingsProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   subHeadings?: SubHeadings[];
 }
 
-export const SubHeadings: FC<SubHeadingsProps> = ({
+export const SubHeadings = <T extends FieldValues>({
   control,
   subHeadings = subHeadingOptions,
-}) => {
+  name,
+}: SubHeadingsProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="subHeadings"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-3">
             <SelectInput

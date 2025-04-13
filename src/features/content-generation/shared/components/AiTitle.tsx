@@ -1,30 +1,30 @@
 import SwitchInput from "@/components/shared/inputs/SwitchInput";
-import { FormField } from "@/components/ui/form";
-import { Control } from "react-hook-form";
-import { FC } from "react";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from "react-hook-form";
 
-interface AiTitleProps {
-  control: Control<ContentGenCommonFormValues>;
+interface AiTitleProps<T extends FieldValues> {
+  control: Control<T>;
+  name: FieldPath<T>; // Ensures valid key from the form schema
 }
 
-export const AiTitle: FC<AiTitleProps> = ({ control }) => {
+export const AiTitle = <T extends FieldValues>({
+  control,
+  name,
+}: AiTitleProps<T>) => {
+  const { field } = useController({ control, name });
+
   return (
-    <>
-      <FormField
-        control={control}
-        name="aiGeneratedTitle"
-        render={({ field }) => (
-          <SwitchInput
-            checked={field.value}
-            onCheckedChange={field.onChange}
-            badgeText="AI"
-            label="Enable AI Title"
-            tooltip="Let AI write your title for better SEO reach"
-            description="Automatically generate titles using smart AI"
-          />
-        )}
-      />
-    </>
+    <SwitchInput
+      checked={field.value}
+      onCheckedChange={field.onChange}
+      badgeText="AI"
+      label="Enable AI Title"
+      tooltip="Let AI write your title for better SEO reach"
+      description="Automatically generate titles using smart AI"
+    />
   );
 };

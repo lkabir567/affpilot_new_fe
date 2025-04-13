@@ -1,9 +1,7 @@
 import SelectInput from "@/components/shared/inputs/SelectInput";
 import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Globe } from "lucide-react";
-import { Control } from "react-hook-form";
-import { FC } from "react";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 const languages = [
   { label: "English", value: "English" },
@@ -23,20 +21,22 @@ type Language = {
   value: string;
 };
 
-interface SelectLanguageProps {
-  control: Control<ContentGenCommonFormValues>;
+interface SelectLanguageProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   language?: Language[];
 }
 
-export const SelectLanguage: FC<SelectLanguageProps> = ({
+export const SelectLanguage = <T extends FieldValues>({
   control,
   language = languages,
-}) => {
+  name,
+}: SelectLanguageProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="language"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-3">
             <SelectInput

@@ -1,9 +1,7 @@
 import SelectInput from "@/components/shared/inputs/SelectInput";
 import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { FileText } from "lucide-react";
-import { FC } from "react";
-import { Control } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 const articleTypes = [
   { label: "Long-form Article", value: "Long Post Form" },
@@ -21,20 +19,22 @@ type Article = {
   value: string;
 };
 
-interface SelectArticleTypeProps {
-  control: Control<ContentGenCommonFormValues>;
+interface SelectArticleTypeProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   articles?: Article[];
 }
 
-export const SelectArticleType: FC<SelectArticleTypeProps> = ({
+export const SelectArticleType = <T extends FieldValues>({
   control,
   articles = articleTypes,
-}) => {
+  name,
+}: SelectArticleTypeProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="articleType"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-3">
             <SelectInput

@@ -8,20 +8,22 @@ import {
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { ListChecks } from "lucide-react";
-import { Control } from "react-hook-form";
-import { FC } from "react";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
-interface KeywordsProps {
-  control: Control<ContentGenCommonFormValues>;
+interface KeywordsProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
 }
 
-export const Keywords: FC<KeywordsProps> = ({ control }) => {
+export const Keywords = <T extends FieldValues>({
+  control,
+  name,
+}: KeywordsProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="keywords"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-3">
             <FormLabel className="font-medium text-gray-700 flex items-center gap-2">

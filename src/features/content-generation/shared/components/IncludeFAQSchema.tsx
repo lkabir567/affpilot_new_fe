@@ -1,19 +1,21 @@
 import SwitchInput from "@/components/shared/inputs/SwitchInput";
 import { FormField } from "@/components/ui/form";
-import { FC } from "react";
-import { Control } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
-interface IncludeFAQSchemaProps {
-  control: Control<ContentGenCommonFormValues>;
+interface IncludeFAQSchemaProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
 }
 
-export const IncludeFAQSchema: FC<IncludeFAQSchemaProps> = ({ control }) => {
+export const IncludeFAQSchema = <T extends FieldValues>({
+  control,
+  name,
+}: IncludeFAQSchemaProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="includeFaqSchema"
+        name={name}
         render={({ field }) => (
           <SwitchInput
             checked={field.value}

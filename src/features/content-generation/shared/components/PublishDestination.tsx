@@ -7,16 +7,28 @@ import {
 } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { Globe, PencilLine } from "lucide-react";
-import { Control, UseFormSetValue } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
-import { FC } from "react";
+import {
+  Control,
+  FieldValues,
+  Path,
+  PathValue,
+  UseFormSetValue,
+} from "react-hook-form";
 import {
   bloggerLogo,
   mediumLogo,
   wordpressLogo,
 } from "@/lib/images/importImage";
 
-const publishingDestination = [
+type PublishDestination = {
+  value: "wordpress" | "blogger" | "medium" | "editor"; // Restrict to these values
+  label: string;
+  icon: React.ReactNode;
+  description: string;
+  color: string;
+};
+
+const publishingDestination: PublishDestination[] = [
   {
     value: "wordpress",
     label: "WordPress",
@@ -47,30 +59,24 @@ const publishingDestination = [
   },
 ];
 
-type PublishDestination = {
-  value: string;
-  label: string;
-  icon: string;
-  description: string;
-  color: string;
-};
-
-interface PublishDestinationProps {
-  control: Control<ContentGenCommonFormValues>;
-  setValue: UseFormSetValue<ContentGenCommonFormValues>;
+interface PublishDestinationProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
+  setValue: UseFormSetValue<T>;
   destinations?: PublishDestination[];
 }
 
-export const PublishDestination: FC<PublishDestinationProps> = ({
+export const PublishDestination = <T extends FieldValues>({
   control,
-  destinations = publishingDestination,
   setValue,
-}) => {
+  name,
+  destinations = publishingDestination,
+}: PublishDestinationProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="publishingDestination"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-4 md:px-2 px-0">
             <FormLabel className="font-medium text-gray-700 flex items-center gap-2">
@@ -89,14 +95,7 @@ export const PublishDestination: FC<PublishDestinationProps> = ({
                         : "border-gray-200 hover:border-gray-300 "
                     )}
                     onClick={() =>
-                      setValue(
-                        "publishingDestination",
-                        destination.value as
-                          | "wordpress"
-                          | "blogger"
-                          | "medium"
-                          | "editor"
-                      )
+                      setValue(name, destination.value as PathValue<T, Path<T>>)
                     }
                   >
                     <div

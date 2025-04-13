@@ -1,9 +1,7 @@
 import SelectInput from "@/components/shared/inputs/SelectInput";
 import { FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { HelpCircle } from "lucide-react";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
-import { Control } from "react-hook-form";
-import { FC } from "react";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 const noFaqOptions = [
   {
@@ -21,20 +19,22 @@ type FaqOptions = {
   value: string;
 };
 
-interface NumberOfFAQsProps {
-  control: Control<ContentGenCommonFormValues>;
+interface NumberOfFAQsProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
   faqOptions?: FaqOptions[];
 }
 
-export const NumberOfFAQs: FC<NumberOfFAQsProps> = ({
+export const NumberOfFAQs = <T extends FieldValues>({
   control,
   faqOptions = noFaqOptions,
-}) => {
+  name,
+}: NumberOfFAQsProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="faqs"
+        name={name}
         render={({ field }) => (
           <FormItem className="space-y-3">
             <SelectInput

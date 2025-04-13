@@ -1,19 +1,21 @@
 import SwitchInput from "@/components/shared/inputs/SwitchInput";
 import { FormField } from "@/components/ui/form";
-import { FC } from "react";
-import { Control } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
+import { Control, FieldValues, Path } from "react-hook-form";
 
-interface ImageCreditProps {
-  control: Control<ContentGenCommonFormValues>;
+interface ImageCreditProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
 }
 
-export const ImageCredit: FC<ImageCreditProps> = ({ control }) => {
+export const ImageCredit = <T extends FieldValues>({
+  control,
+  name,
+}: ImageCreditProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="imageCredit"
+        name={name}
         render={({ field }) => (
           <SwitchInput
             checked={field.value}

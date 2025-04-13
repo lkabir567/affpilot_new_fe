@@ -1,20 +1,21 @@
 import SwitchInput from "@/components/shared/inputs/SwitchInput";
 import { FormField } from "@/components/ui/form";
 import { Youtube } from "lucide-react";
-import { FC } from "react";
-import { Control } from "react-hook-form";
-import { ContentGenCommonFormValues } from "../schema/schema.common";
-
-interface IncludeVideoProps {
-  control: Control<ContentGenCommonFormValues>;
+import { Control, FieldValues, Path } from "react-hook-form";
+interface IncludeVideoProps<T extends FieldValues> {
+  control: Control<T>;
+  name: Path<T>;
 }
 
-export const IncludeVideo: FC<IncludeVideoProps> = ({ control }) => {
+export const IncludeVideo = <T extends FieldValues>({
+  control,
+  name,
+}: IncludeVideoProps<T>) => {
   return (
     <>
       <FormField
         control={control}
-        name="includeYoutubeVideo"
+        name={name}
         render={({ field }) => (
           <SwitchInput
             checked={field.value}

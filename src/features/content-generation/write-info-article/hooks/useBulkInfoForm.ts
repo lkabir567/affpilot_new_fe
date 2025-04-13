@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   bulkInfoFormSchema,
   BulkInfoFormValues,
-} from "../schemas/bulkInfo.schemas";
+} from "../schemas/write.info.article.schemas";
 
 export function useBulkInfoForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,8 +28,6 @@ export function useBulkInfoForm() {
       includeYoutubeVideo: false,
     },
   });
-
-  const selectedGptVersion = bulkForm.watch("gptVersion");
 
   async function onSubmit(data: BulkInfoFormValues) {
     try {
@@ -59,6 +57,5 @@ export function useBulkInfoForm() {
     isSubmitting,
     wordpressSite,
     addWordpressSite,
-    selectedGptVersion,
   };
 }
