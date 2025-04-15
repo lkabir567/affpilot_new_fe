@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// loginFormSchema
 export const loginSchema = z.object({
   username: z.string().min(1, "Username or email is required"),
   password: z.string().min(6, "Password must be at least 6 characters"),
@@ -21,6 +22,7 @@ const passwordFieldWithConfirm = z
   .string()
   .min(8, { message: "Password must be at least 8 characters" });
 
+// registerFormSchema
 export const registerSchema = z
   .object({
     firstName: z
@@ -53,6 +55,7 @@ export const registerSchema = z
     path: ["confirmPassword"],
   });
 
+// resetPasswordSchema
 export const resetPasswordSchema = z
   .object({
     password: passwordField,

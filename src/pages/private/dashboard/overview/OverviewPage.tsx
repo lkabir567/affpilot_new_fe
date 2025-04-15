@@ -10,7 +10,7 @@ import {
 const OverviewPage = () => {
   return (
     <div>
-      <h1 className="text-4xl font-bold bg-gradient-to-t from-primary to-secondary bg-clip-text text-transparent mb-4">
+      <h1 className="text-4xl font-bold bg-gradient-to-t from-primary to-secondary bg-clip-text text-transparent py-1 mb-2">
         Dashboard
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
