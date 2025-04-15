@@ -1,15 +1,8 @@
 import { Card, CardHeader } from "@/components/ui/card";
-import { LoginForm, useAuth } from "@/features/auth";
+import { LoginForm } from "@/features/auth";
 import { primaryLogo } from "@/lib/images/importImage";
-import { Navigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { isAuthenticated } = useAuth();
-
-  if (isAuthenticated) {
-    return <Navigate to="/" replace />;
-  }
-
   return (
     <div className="min-h-screen flex flex-col justify-center sm:px-6 lg:px-8 relative overflow-hidden">
       <Card className="sm:mx-auto sm:w-full sm:max-w-2xl z-10">

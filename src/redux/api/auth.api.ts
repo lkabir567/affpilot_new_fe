@@ -24,8 +24,20 @@ export const authApi = createApi({
     checkAuth: builder.query({
       query: () => "/auth/verify",
     }),
+    signup: builder.mutation({
+      query: (credentials) => ({
+        url: "accounts/v1/signup/",
+        method: "POST",
+        body: credentials,
+        headers: { Accept: "*/*" },
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useGoogleLoginMutation, useCheckAuthQuery } =
-  authApi;
+export const {
+  useLoginMutation,
+  useGoogleLoginMutation,
+  useCheckAuthQuery,
+  useSignupMutation,
+} = authApi;

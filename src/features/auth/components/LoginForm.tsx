@@ -13,7 +13,6 @@ import { Input } from "@/components/ui/input";
 import { ENV } from "@/lib/dot.env";
 
 import { useGoogleLoginMutation, useLoginMutation } from "@/redux/api";
-import { useAppDispatch } from "@/redux/hooks/useAppDispatch";
 import { useAppSelector } from "@/redux/hooks/useAppSelector";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -21,7 +20,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { loginSchema } from "../schemas/auth.schemas";
 
@@ -37,7 +36,8 @@ export function LoginForm() {
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
   const [login, { isLoading: loginLoading }] = useLoginMutation();
   const [googleLogin] = useGoogleLoginMutation();
   const { recaptchaVerified } = useAppSelector((state) => state.auth);
@@ -76,6 +76,7 @@ export function LoginForm() {
       setIsLoading(true);
       form.clearErrors();
       await login(data).unwrap();
+      navigate("/");
     } catch (error) {
       const errorMessage = getErrorMessage(error);
       form.setError("root", { type: "manual", message: errorMessage });

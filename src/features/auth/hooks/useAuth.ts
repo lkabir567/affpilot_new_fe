@@ -6,7 +6,7 @@ export const useAuth = () => {
   const { user, isVerified, token } = useAppSelector((state) => state.auth);
 
   return {
-    isAuthenticated: !!user && isVerified && !!token,
+    isAuthenticated: !!user,
     user,
     isVerified,
     token,

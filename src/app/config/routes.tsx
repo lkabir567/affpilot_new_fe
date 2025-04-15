@@ -1,5 +1,6 @@
 import DashboardLayout from "@/pages/private/dashboard/DashboardLayout";
 import OverviewPage from "@/pages/private/dashboard/overview/OverviewPage";
+import EmailVerificationNoticePage from "@/pages/public/email-verfication/EmailVerificationNoticePage";
 import ForgotPasswordPage from "@/pages/public/forget-password/ForgetPasswordPage";
 import LoginPage from "@/pages/public/login/LoginPage";
 import ResetPasswordPage from "@/pages/public/reset-password/ResetPasswordPage";
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
   {
     path: "/reset-password",
     element: <ResetPasswordPage />,
+  },
+  {
+    path: "/verify-email",
+    element: <EmailVerificationNoticePage />,
   },
   {
     element: (

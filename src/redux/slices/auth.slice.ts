@@ -40,6 +40,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.isVerified = false;
+      state.token = null;
     },
   },
   extraReducers: (builder) => {

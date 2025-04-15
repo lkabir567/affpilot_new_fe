@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { ENV } from "@/lib/dot.env";
 
+import { useSignupMutation } from "@/redux/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import PhoneInput from "react-phone-input-2";
@@ -34,7 +35,7 @@ export function SignupForm({ value }: SignupFormProps) {
   const { setIsSuccess } = value;
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [signup] = useSignupMutation();
   const form = useForm({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -52,10 +53,31 @@ export function SignupForm({ value }: SignupFormProps) {
 
   type RegisterFormData = z.infer<typeof registerSchema>;
 
-  const onSubmit = (data: RegisterFormData) => {
-    console.log("Submitted Data:", data);
-    // handle registration
-    setIsSuccess(true);
+  const onSubmit = async (data: RegisterFormData) => {
+    try {
+      await signup(data).unwrap();
+      setIsSuccess(true);
+    } catch (error: any) {
+      if (error.status === 400 && error.data) {
+        // Handle field-specific errors
+        Object.entries(error.data).forEach(([field, messages]) => {
+          const formField = field as keyof RegisterFormData;
+          const message = (messages as string[]).join(" ");
+
+          if (Object.keys(form.getValues()).includes(formField)) {
+            form.setError(formField, { type: "manual", message });
+          } else {
+            form.setError("root", { type: "manual", message });
+          }
+        });
+      } else {
+        // Handle generic errors
+        form.setError("root", {
+          type: "manual",
+          message: "An error occurred during registration",
+        });
+      }
+    }
   };
 
   const handleCaptchaChange = (token: string) => {
@@ -73,6 +95,11 @@ export function SignupForm({ value }: SignupFormProps) {
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 px-4 sm:px-10"
           >
+            {form.formState.errors.root && (
+              <p className="text-sm font-medium text-destructive text-center">
+                {form.formState.errors.root.message}
+              </p>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* First-name */}
               <FormField

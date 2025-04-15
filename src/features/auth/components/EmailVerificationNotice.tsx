@@ -68,3 +68,62 @@
 //     </div>
 //   );
 // }
+
+import { FaEnvelopeOpenText } from "react-icons/fa";
+import { Link } from "react-router-dom";
+export function EmailVerificationNotice({ email }: { email: string }) {
+  // Add your resend email logic here
+
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-background rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-800">
+        <div className="flex flex-col items-center space-y-6">
+          <div className="bg-blue-100/80 dark:bg-blue-900/20 p-4 rounded-full">
+            <FaEnvelopeOpenText className="h-8 w-8 text-blue-500 dark:text-blue-400" />
+          </div>
+
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              Confirm Your Email
+            </h1>
+            <p className="text-muted-foreground">
+              We sent a verification link to
+            </p>
+            <p className="font-medium text-primary text-lg">
+              {email || "your email"}
+            </p>
+          </div>
+
+          <div className="w-full space-y-4">
+            {/* <Button className="w-full gap-2" size="lg">
+              <TbReload className="h-5 w-5" />
+              Resend Verification Email
+            </Button> */}
+
+            <div className="text-center text-sm text-muted-foreground">
+              <p className="mt-4">
+                Didn't receive the email? Check your spam folder or{" "}
+                <Link
+                  to="/signup"
+                  className="block text-primary font-medium hover:underline underline-offset-4"
+                >
+                  try another email address
+                </Link>
+              </p>
+            </div>
+
+            <div className="mt-6 text-center">
+              <Link
+                to="/login"
+                className="inline-flex items-center text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              >
+                <span className="mr-2">←</span>
+                Return to sign in
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
