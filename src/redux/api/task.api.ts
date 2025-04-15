@@ -1,4 +1,4 @@
-import { generateQueryString } from "@/utils/queryString/generateQueryString";
+import { generateQueryString } from "@/utils/query-string/generateQueryString";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "../utils/base-query-configurations";
 

@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check-structure": "node scripts/validateStructure.js",
+    "check-structure": "node tree_validator.js",
     "prepare": "husky install"
   },
   "husky": {
@@ -62,7 +62,7 @@
     "globals": "^15.15.0",
     "husky": "^9.1.7",
     "ts-node": "^10.9.2",
-    "typescript": "~5.7.2",
+    "typescript": "^5.7.2",
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0"
   }

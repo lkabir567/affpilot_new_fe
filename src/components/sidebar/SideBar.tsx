@@ -1,11 +1,11 @@
-import { useState } from "react";
-import { BarChart2, HelpCircle, Settings, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { primaryLogo } from "@/lib/images/importImage";
 import { cn } from "@/lib/utils";
+import { BarChart2, HelpCircle, Settings, X } from "lucide-react";
+import { useState } from "react";
+import SideBarCredits from "../credits-card/SideBarCredits";
 import ColorPicker from "../settings/ColorPicker";
 import { Card } from "../ui/card";
-import SideBarCredits from "../creditsCard/SideBarCredits";
-import { primaryLogo } from "@/lib/images/importImage";
 import Navigation from "./Navigation";
 
 interface SidebarProps {
@@ -16,6 +16,7 @@ export function Sidebar({ isMobile = false }: SidebarProps) {
   const [openSetting, setOpenSetting] = useState(false);
   return (
     <aside
+    
       className={cn(
         "flex flex-col h-full bg-gray-secondary text-primary border-r",
         isMobile ? "w-full" : "w-64"
