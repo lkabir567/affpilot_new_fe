@@ -32,6 +32,22 @@ export const authApi = createApi({
         headers: { Accept: "*/*" },
       }),
     }),
+    forgotPassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/accounts/v1/forgot-password-request/",
+        method: "POST",
+        body: credentials,
+        headers: { Accept: "*/*" },
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/accounts/v1/reset-password-request/",
+        method: "POST",
+        body: credentials,
+        headers: { Accept: "*/*" },
+      }),
+    }),
   }),
 });
 
@@ -40,4 +56,6 @@ export const {
   useGoogleLoginMutation,
   useCheckAuthQuery,
   useSignupMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
 } = authApi;

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useForgotPasswordMutation } from "@/redux/api";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
@@ -29,7 +30,8 @@ export function ForgotPasswordForm({ value }: ForgotPasswordFormProps) {
   const [formData, setFormData] = useState<FormValues>({ email: "" });
   const [errors, setErrors] = useState<{ email?: string }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const [forgotPassword, { isLoading: isLoading2 }] =
+    useForgotPasswordMutation();
   // Handle input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -39,26 +41,34 @@ export function ForgotPasswordForm({ value }: ForgotPasswordFormProps) {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Form submitted:", formData);
 
     // Validate form data
-    const result = formSchema.safeParse(formData);
-    if (!result.success) {
-      const newErrors: Record<string, string> = {};
-      result.error.errors.forEach((err) => {
-        if (err.path.length > 0) {
-          newErrors[err.path[0]] = err.message;
-        }
-      });
-      setErrors(newErrors);
-      return;
-    }
+    // const result = formSchema.safeParse(formData);
+    // if (!result.success) {
+    //   const newErrors: Record<string, string> = {};
+    //   result.error.errors.forEach((err) => {
+    //     if (err.path.length > 0) {
+    //       newErrors[err.path[0]] = err.message;
+    //     }
+    //   });
+    //   setErrors(newErrors);
+    //   return;
+    // }
 
-    setIsLoading(true);
+    // setIsLoading(true);
 
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      setIsSuccess(true);
+
+      const response = await forgotPassword(formData).unwrap();
+      console.log("Response:", response);
+
+      if (response.status === "success") {
+        setIsSuccess(true);
+      }
+
+      // setIsSuccess(true);
     } catch (error) {
       console.error("Error sending password reset email:", error);
     } finally {

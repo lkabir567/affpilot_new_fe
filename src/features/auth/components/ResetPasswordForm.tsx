@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useResetPasswordMutation } from "@/redux/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
@@ -18,30 +19,43 @@ import { resetPasswordSchema } from "../schemas/auth.schemas";
 
 type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
 
-export function ResetPasswordForm() {
+export function ResetPasswordForm({
+  code,
+  setIsSuccess,
+}: {
+  code: string | null;
+  setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const form = useForm<ResetPasswordFormValues>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
-      password: "",
-      confirmPassword: "",
+      new_password: "",
+      confirm_password: "",
     },
   });
 
-  const onSubmit = (data: ResetPasswordFormValues) => {
+  const onSubmit = async (data: ResetPasswordFormValues) => {
     setLoading(true);
     // Simulate an API call to reset the password
-    console.log("Form submitted:", data);
-    // Here you would typically send the data to your API
-    setTimeout(() => {
+    if (!code) return;
+
+    try {
+      const response = await resetPassword({
+        code,
+        new_password: data.new_password,
+      }).unwrap();
+      if (response.status === "success") {
+        setIsSuccess(true);
+      }
+    } catch (error) {
+      console.error("Error resetting password:", error);
+    } finally {
       setLoading(false);
-      // Reset the form after submission
-      form.reset();
-      // Redirect or show success message
-    }, 2000);
+    }
   };
 
   return (
@@ -51,7 +65,7 @@ export function ResetPasswordForm() {
           {/* new-password */}
           <FormField
             control={form.control}
-            name="password"
+            name="new_password"
             render={({ field }) => (
               <FormItem className="relative">
                 <FormLabel>New Password</FormLabel>
@@ -84,7 +98,7 @@ export function ResetPasswordForm() {
           {/* new-confirm password */}
           <FormField
             control={form.control}
-            name="confirmPassword"
+            name="confirm_password"
             render={({ field }) => (
               <FormItem className="relative">
                 <FormLabel>Confirm Password</FormLabel>
@@ -97,7 +111,7 @@ export function ResetPasswordForm() {
                 </FormControl>
                 <span
                   className={`absolute right-3 top-1/2 ${
-                    form.formState.errors.confirmPassword
+                    form.formState.errors.confirm_password
                       ? "top-1/3"
                       : "top-1/2"
                   } cursor-pointer text-muted-foreground`}
@@ -113,8 +127,12 @@ export function ResetPasswordForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? "Resetting..." : "Reset Password"}
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={loading || isLoading}
+          >
+            {loading || isLoading ? "Resetting..." : "Reset Password"}
           </Button>
         </form>
       </Form>

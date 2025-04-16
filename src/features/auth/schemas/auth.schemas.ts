@@ -58,10 +58,10 @@ export const registerSchema = z
 // resetPasswordSchema
 export const resetPasswordSchema = z
   .object({
-    password: passwordField,
-    confirmPassword: passwordFieldWithConfirm,
+    new_password: passwordField,
+    confirm_password: passwordFieldWithConfirm,
   })
-  .refine((data) => data.password === data.confirmPassword, {
+  .refine((data) => data.new_password === data.confirm_password, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
