@@ -1,6 +1,4 @@
----
-
-## ✅ **Standard Git Commit Message Structure of Affpilot**
+## ✅ Standard Git Commit Message Structure of Affpilot
 
 ```
 <type>[optional scope]: <short description>

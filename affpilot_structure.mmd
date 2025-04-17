@@ -1,0 +1,117 @@
+graph TD
+    A[Affpilot/] --> B[public/]
+    B --> B1[favicon.ico]
+    B --> B2[robots.txt]
+    B --> B3[vite.svg]
+    B --> B4[index.html # MISSING]
+    
+    A --> C[src/]
+    C --> C1[app/]
+    C1 --> C1a[core/]
+    C1a --> C1a1[App.tsx]
+    C1a --> C1a2[AppProviders.tsx]
+    C1a --> C1a3[AppRouter.tsx]
+    
+    C1 --> C1b[config/]
+    C1b --> C1b1[routes.ts]
+    C1b --> C1b2[constants.ts]
+    C1b --> C1b3[apiConfig.ts # MISSING]
+    
+    C --> C2[assets/]
+    C2 --> C2a[images/]
+    C2 --> C2b[fonts/]
+    C2 --> C2c[styles/]
+    C2c --> C2c1[global.css]
+    C2c --> C2c2[tailwind/]
+    C2c2 --> C2c2a[base.css # MISSING]
+    C2c2 --> C2c2b[components.css # MISSING]
+    
+    C --> C3[components/]
+    C3 --> C3a[ui/]
+    C3a --> C3a1[button.tsx]
+    
+    C3 --> C3b[shared/]
+    C3b --> C3b1[Table/]
+    C3b --> C3b2[DashboardCard/]
+    C3b --> C3b3[FormBuilder/]
+    
+    C3 --> C3c[features/]
+    
+    C --> C4[features/]
+    C4 --> C4a[auth/]
+    C4a --> C4a1[components/]
+    C4a --> C4a2[hooks/]
+    C4a --> C4a3[types.ts]
+    C4a --> C4a4[schemas/ # MISSING]
+    
+    C4 --> C4b[content-generation/]
+    C4b --> C4b1[bulk-article/]
+    C4b1 --> C4b1a[components/]
+    C4b1a --> C4b1a1[BulkConfigForm/]
+    C4b1a1 --> C4b1a1a[BulkConfigForm.tsx]
+    C4b1a1 --> C4b1a1b[BulkConfigForm.styles.ts]
+    C4b1a1 --> C4b1a1c[BulkConfigForm.test.tsx # MISSING]
+    
+    C --> C5[hooks/]
+    C5 --> C5a[useDebounce.ts # MISSING]
+    
+    C --> C6[layouts/]
+    C6 --> C6a[MainLayout.tsx]
+    C6 --> C6b[DashboardLayout.tsx]
+    
+    C --> C7[lib/]
+    C7 --> C7a[ai/]
+    C7a --> C7a1[openai.ts]
+    C7 --> C7b[cms/]
+    C7 --> C7c[httpClient.ts # MISSING]
+    
+    C --> C8[pages/]
+    C8 --> C8a[public/]
+    C8 --> C8b[private/]
+    
+    C --> C9[providers/]
+    C9 --> C9a[AuthProvider.tsx # MISSING]
+    
+    C --> C10[redux/]
+    C10 --> C10a[store.ts]
+    C10 --> C10b[rootReducer.ts]
+    C10 --> C10c[middleware/]
+    C10c --> C10c1[authMiddleware.ts]
+    
+    C10 --> C10d[api/]
+    C10d --> C10d1[contentApi.ts]
+    C10d --> C10d2[seoApi.ts]
+    
+    C10 --> C10e[slices/]
+    C10e --> C10e1[uiSlice.ts]
+    C10e --> C10e2[authSlice.ts]
+    
+    C --> C11[services/]
+    C11 --> C11a[contentService.ts]
+    C11 --> C11b[seoService.ts]
+    
+    C --> C12[types/]
+    C12 --> C12a[index.d.ts # MISSING]
+    
+    C --> C13[utils/]
+    C13 --> C13a[contentHelpers.ts]
+    C13 --> C13b[seoCalculator.ts]
+    C13 --> C13c[errorHandler.ts # MISSING]
+    
+    C --> C14[validations/]
+    C14 --> C14a[authSchemas.ts # MISSING]
+    
+    C --> C15[e2e/]
+    C15 --> C15a[cypress/ # MISSING]
+    C15a --> C15a1[integration/]
+    C15a1 --> C15a1a[auth.spec.ts # MISSING]
+    
+    A --> D[.env]
+    A --> E[tsconfig.json]
+    A --> F[vite.config.ts]
+    A --> G[.eslintrc # MISSING]
+    A --> H[.prettierrc # MISSING]
+    A --> I[package.json # MISSING]
+    A --> J[README.md # MISSING]
+    A --> K[tailwind.config.js # MISSING]
+    A --> L[jest.config.ts # MISSING]                                                                                                                                                                                                              

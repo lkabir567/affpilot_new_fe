@@ -37,6 +37,7 @@
     "@tailwindcss/vite": "^4.0.14",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.7.3",
     "libphonenumber-js": "^1.12.6",
     "localforage": "^1.10.0",
     "lucide-react": "^0.482.0",
